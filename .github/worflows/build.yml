@@ -1,0 +1,23 @@
+name: build
+
+on: push
+
+env:
+  DEBIAN_FRONTEND: noninteractive
+
+jobs:
+  run:
+    runs-on: ubuntu-20.04
+    # container: debian:11
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Distro setup
+        run: |
+          git clone https://github.com/romeric/Fastor.git
+          g++ src/views_fastor.cpp -I Fastor -o faster -O3 -std=c++17 -Ofast -march=native -funroll-loops -DNDEBUG -fwhole-program -flto
+          ./faster 100
+          g++ src/views_fastor.cpp -I Fastor -o faster -O3 -std=c++17 -Ofast -march=native -funroll-loops -DNDEBUG -fwhole-program
+          ./faster 100
+          g++ src/views_fastor.cpp -I Fastor -o faster -O3 -std=c++17 -Ofast -march=native 
+          ./faster 100
