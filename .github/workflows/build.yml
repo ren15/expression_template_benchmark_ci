@@ -14,17 +14,17 @@ jobs:
 
       - name: Distro setup
         run: |
-          brew install gcc@11 gcc@10 gcc@9
+          brew install gcc@11
 
       - name: Compile and compare
         run: |
           git clone https://github.com/romeric/Fastor.git
-          echo "gcc11"
-          g++-11 src/views_fastor.cpp -I Fastor -o faster -O3 -std=c++17 -Ofast -march=native -funroll-loops -DNDEBUG -fwhole-program -flto
-          ./faster 100
-          echo "gcc10"
-          g++-10 src/views_fastor.cpp -I Fastor -o faster -O3 -std=c++17 -Ofast -march=native -funroll-loops -DNDEBUG -fwhole-program -flto
-          ./faster 100
-          echo "gcc9"
-          g++-9 src/views_fastor.cpp -I Fastor -o faster -O3 -std=c++17 -Ofast -march=native -funroll-loops -DNDEBUG -fwhole-program -flto
-          ./faster 100
+          git clone https://bitbucket.org/blaze-lib/blaze.git
+          g++-11 src/views_fastor.cpp -I Fastor -o faster_bench -O3 -std=c++17 -Ofast -march=native -funroll-loops -DNDEBUG -fwhole-program -flto
+          ./faster_bench 100
+          ./faster_bench 150
+          ./faster_bench 200
+          g++-11 src/views_blaze.cpp -I blaze -o blaze_bench -O3 -std=c++17 -Ofast -march=native -funroll-loops -DNDEBUG -fwhole-program -flto
+          ./blaze_bench 100
+          ./blaze_bench 150
+          ./blaze_bench 200
