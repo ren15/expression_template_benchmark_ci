@@ -57,7 +57,6 @@ void run_finite_difference() {
         iter++;
     }
 
-    bench_views::println(" Relative error is: ", err, '\n');
     bench_views::println("Number of iterations: ", iter, '\n');
 
 }

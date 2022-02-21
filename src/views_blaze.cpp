@@ -61,7 +61,6 @@ void run_finite_difference() {
         iter++;
     }
 
-    println(" Relative error is: ", err, '\n');
     println("Number of iterations: ", iter, '\n');
 }
 
