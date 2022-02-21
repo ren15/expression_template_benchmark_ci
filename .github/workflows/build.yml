@@ -14,10 +14,17 @@ jobs:
 
       - name: Distro setup
         run: |
+          brew install gcc@11 gcc@10 gcc@9
+
+      - name: Compile and compare
+        run: |
           git clone https://github.com/romeric/Fastor.git
-          g++ src/views_fastor.cpp -I Fastor -o faster -O3 -std=c++17 -Ofast -march=native -funroll-loops -DNDEBUG -fwhole-program -flto
+          echo "gcc11"
+          g++-11 src/views_fastor.cpp -I Fastor -o faster -O3 -std=c++17 -Ofast -march=native -funroll-loops -DNDEBUG -fwhole-program -flto
           ./faster 100
-          g++ src/views_fastor.cpp -I Fastor -o faster -O3 -std=c++17 -Ofast -march=native -funroll-loops -DNDEBUG -fwhole-program
+          echo "gcc10"
+          g++-10 src/views_fastor.cpp -I Fastor -o faster -O3 -std=c++17 -Ofast -march=native -funroll-loops -DNDEBUG -fwhole-program -flto
           ./faster 100
-          g++ src/views_fastor.cpp -I Fastor -o faster -O3 -std=c++17 -Ofast -march=native 
+          echo "gcc9"
+          g++-9 src/views_fastor.cpp -I Fastor -o faster -O3 -std=c++17 -Ofast -march=native -funroll-loops -DNDEBUG -fwhole-program -flto
           ./faster 100
