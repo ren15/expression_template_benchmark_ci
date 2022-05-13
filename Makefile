@@ -3,7 +3,7 @@
 BUILD_DIR=${PWD}/build
 
 git_clone:
-    git clone https://bitbucket.org/blaze-lib/blaze.git
+	git clone https://bitbucket.org/blaze-lib/blaze.git
 	git clone https://github.com/romeric/Fastor.git
 
 configure:
@@ -13,3 +13,5 @@ configure:
 
 build:
 	cmake --build ${BUILD_DIR}
+docker_pull:
+	docker pull intel/oneapi-basekit
