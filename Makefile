@@ -1,4 +1,4 @@
-.PHONY: $(MAKECMDGOALS)
+.PHONY: all $(MAKECMDGOALS)
 
 BUILD_DIR=${PWD}/build
 
