@@ -99,3 +99,6 @@ build:
 	cmake --build ${BUILD_DIR}
 docker_pull:
 	docker pull intel/oneapi-basekit
+
+docker_build:
+	docker build -t repo_env .
