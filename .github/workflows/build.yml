@@ -11,14 +11,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Distro setup
+      - name: Install compilers
         run: |
-          brew install gcc@11
+          sudo apt install -y build-essentail gcc g++ cmake make
 
       - name: Compile and compare
         run: |
           make git_clone
-          make configure
-          make build
-          ./build/bin/faster_bench 100
-          ./build/bin/blaze_bench 100
+          make all
+          make run

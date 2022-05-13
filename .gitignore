@@ -2,3 +2,4 @@ expression_templates_benchmark
 Fastor
 blaze
 build
+*.exe
