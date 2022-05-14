@@ -18,5 +18,6 @@ jobs:
       - name: Compile and compare
         run: |
           make git_clone
-          make all
-          make run
+          make configure
+          make build
+          ./build/bin/blaze_bench 200

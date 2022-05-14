@@ -1,6 +1,7 @@
 .PHONY: all $(MAKECMDGOALS)
 
-BUILD_DIR=${PWD}/build
+export BUILD_DIR=${PWD}/build
+export CMAKE_PREFIX_DIR=${PWD}/blaze/cmake
 
 
 N=200
@@ -33,12 +34,6 @@ FASTOR_FLAGS = -DFASTOR_NO_ALIAS -DFASTOR_DISPATCH_DIV_TO_MUL_EXPR
 
 
 ifeq "$(CXX)" "g++"
-	CXXFLAGS += -finline-functions -finline-limit=1000000 -ffp-contract=fast
-endif
-ifeq "$(CXX)" "g++-9"
-	CXXFLAGS += -finline-functions -finline-limit=1000000 -ffp-contract=fast
-endif
-ifeq "$(CXX)" "/usr/local/bin/g++-9"
 	CXXFLAGS += -finline-functions -finline-limit=1000000 -ffp-contract=fast
 endif
 
@@ -93,7 +88,8 @@ git_clone:
 configure:
 	rm -rf ${BUILD_DIR}
 	mkdir -p ${BUILD_DIR}
-	cmake -S ${PWD} -B ${BUILD_DIR}
+	cmake -S ${PWD} -B ${BUILD_DIR} \
+		-DBLAZE_LIBRARY_PATH=${PWD}/blaze
 
 build:
 	cmake --build ${BUILD_DIR}

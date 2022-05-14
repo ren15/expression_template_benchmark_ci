@@ -17,7 +17,26 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
+list(APPEND CMAKE_MODULE_PATH ${BLAZE_LIBRARY_PATH}/cmake)
+include(Blaze_Import)
+Blaze_Import(
+   QUIET
+   BLAS off
+   LAPACK off
+   THREADING Boost
+   CACHE_SIZE auto
+   VECTORIZATION on
+   STORAGE_ORDER rowMajor
+   THRESHOLD_DMATDVECMULT 100000UL
+   THRESHOLD_SMP_DVECDVECADD 1000000UL
+)
+
+
 add_executable(blaze_bench
 src/views_blaze.cpp
+)
+
+target_link_libraries(blaze_bench PRIVATE 
+Blaze
 )
 
