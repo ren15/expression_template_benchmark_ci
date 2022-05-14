@@ -15,9 +15,12 @@ jobs:
         run: |
           sudo apt-get install -y build-essential gcc g++ cmake make
 
-      - name: Compile and compare
+      - name: Compile
         run: |
           make git_clone
           make configure
           make build
+
+      - name: Run
+        run: |
           ./build/bin/blaze_bench 200
